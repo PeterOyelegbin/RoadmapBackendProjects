@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-import json
-import os
-import argparse
+import json, os, argparse
 from datetime import datetime
 
 # Path to the JSON file where tasks are stored
