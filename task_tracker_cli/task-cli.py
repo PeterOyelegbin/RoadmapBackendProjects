@@ -3,8 +3,9 @@
 import json, os, argparse
 from datetime import datetime
 
+
 # Path to the JSON file where tasks are stored
-FILE_PATH = 'tasks.json'
+FILE_PATH = './task_tracker_cli/tasks.json'
 
 # Format time to dd-mm-yy HH:MM
 current_date = datetime.now()
