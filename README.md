@@ -8,3 +8,8 @@ The solution for each project is in it's respective folder. The folder name is t
 1. [Task Tracker CLI](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/task_tracker_cli)
 2. [GitHub User Activity](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/github_user_activity)
 3. [Expense Tracker](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/expense_tracker)
+
+
+### Intermediate Projects
+1. [Markdown Note-taking App](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/mkd_note_taking_app)
+2. 
