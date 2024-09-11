@@ -9,6 +9,12 @@ You have to implement the following features:
 - Provide an endpoint to list the saved notes (i.e. uploaded markdown files).
 - Return the HTML version of the Markdown note (rendered note) through another endpoint.
 
+
+## Demo
+Here's a simple demo of how the application should work:
+[Watch the demo](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/mkd_note_taking_app/mkd_note_taking_app.webm)
+
+
 ## Usage
 ### Apply all Migrations
 Open your teminal and enter the command below to apply migrations:

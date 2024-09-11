@@ -22,8 +22,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('notes/', views.list_markdown, name='list-markdown'),
-    path('notes/upload/', views.upload_markdown, name='upload-markdown'),
-    path('notes/check_grammar/<str:file_id>', views.check_grammar, name='check-grammar'),
-    path('notes/render_note/<str:file_id>/', views.render_note, name='render-note'),
+    path('', views.list_markdown, name='list-markdown'),
+    path('upload/', views.upload_markdown, name='upload-markdown'),
+    path('check_grammar/<str:file_id>', views.check_grammar, name='check-grammar'),
+    path('render_note/<str:file_id>/', views.render_note, name='render-note'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
