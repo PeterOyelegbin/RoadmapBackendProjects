@@ -5,7 +5,7 @@ from uuid import uuid4
 class MarkDown(models.Model):
     id = models.UUIDField(default=uuid4, unique=True, primary_key=True, editable=False)
     filename = models.CharField(max_length=255)
-    file = models.FileField(upload_to='static/md_files/')
+    file = models.FileField(upload_to='./mkd_note_taking_app/static/md_files/')
 
     def __str__(self):
         return self.filename

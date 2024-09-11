@@ -12,7 +12,7 @@ The server should be able to handle multiple clients connecting and disconnectin
 
 ## Demo
 Here's a simple demo of how the application should work:
-[Watch the demo](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/broadcast_server_cli/broadcast_server_demo.webm)
+[Watch the demo](https://github.com/PeterOyelegbin/RoadmapBackendProjects/blob/main/broadcast_server_cli/broadcast_server_demo.webm)
 
 ## Usage
 ### Install Dependencies

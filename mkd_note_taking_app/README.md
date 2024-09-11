@@ -12,7 +12,7 @@ You have to implement the following features:
 
 ## Demo
 Here's a simple demo of how the application should work:
-[Watch the demo](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/mkd_note_taking_app/mkd_note_taking_app.webm)
+[Watch the demo](https://github.com/PeterOyelegbin/RoadmapBackendProjects/blob/main/mkd_note_taking_app/mkd_note_taking_app.webm)
 
 
 ## Usage
