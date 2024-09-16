@@ -11,7 +11,8 @@ When the server is started using the broadcast-server start command, it should l
 The server should be able to handle multiple clients connecting and disconnecting gracefully.
 
 ## Demo
-[![Watch the video](https://img.youtube.com/vi/2wgb0G9moRE&list=PLTYOT9-XlEm4J6GfPJ_S-MKH4Pyq6Deir/maxresdefault.jpg)](https://www.youtube.com/watch?v=2wgb0G9moRE&list=PLTYOT9-XlEm4J6GfPJ_S-MKH4Pyq6Deir)
+Here's a simple demo of how the application should work:
+[Watch the video](https://www.youtube.com/watch?v=IyHRBj_iKY0)
 
 
 ## Usage
