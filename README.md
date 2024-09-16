@@ -12,4 +12,5 @@ The solution for each project is in it's respective folder. The folder name is t
 ## Intermediate Projects
 1. [Markdown Note-taking App](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/mkd_note_taking_app)
 2. [Broadcast Server CLI](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/broadcast_server_cli)
-3. 
+3. [Workout Tracker API](https://github.com/PeterOyelegbin/RoadmapBackendProjects/tree/main/workout_tracker_api)
+4. 
