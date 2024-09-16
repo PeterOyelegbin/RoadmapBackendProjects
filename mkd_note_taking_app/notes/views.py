@@ -6,13 +6,9 @@ from spellchecker import SpellChecker
 from markdown import markdown
 
 # Create your views here.
-def list_markdown(request):
-    markdown = MarkDown.objects.all()
-    return render(request, 'markdown_list.html', {'markdown': markdown})
-
-@csrf_exempt
-def upload_markdown(request):
+def note_app(request):
     form = MarkDownForm()
+    markdown = MarkDown.objects.all()
     if request.method == 'POST':
         form = MarkDownForm(request.POST, request.FILES)
         if form.is_valid():
@@ -20,9 +16,10 @@ def upload_markdown(request):
             filename = request.FILES['file'].name
             markdown.filename = filename
             markdown.save()
-            return redirect('list-markdown')
+            return redirect('home')
         return JsonResponse({'error': 'Invalid form submission'}, status=400)
-    return render(request, 'upload.html', {'form': form})
+    return render(request, 'note_app.html', {'form': form, 'markdown': markdown})
+
 
 @csrf_exempt
 def check_grammar(request, file_id):
@@ -38,21 +35,6 @@ def check_grammar(request, file_id):
     except MarkDown.DoesNotExist:
         return JsonResponse({'error': 'File not found'}, status=404)
 
-# @csrf_exempt
-# def save_note_view(request):
-#     if request.method == 'POST':
-#         form = NoteForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             file = request.FILES['file']
-#             filename = file.name
-#             content = file.read().decode('utf-8')
-#             note, created = Note.objects.get_or_create(filename=filename, defaults={'content': content})
-#             if not created:
-#                 note.content = content
-#                 note.save()
-#             return JsonResponse({'message': f'File {filename} uploaded successfully'})
-#         return JsonResponse({'error': 'Invalid form submission'}, status=400)
-#     return render(request, 'notes/upload.html')
 
 def render_note(request, file_id):
     try:
@@ -61,5 +43,15 @@ def render_note(request, file_id):
         # Convert Markdown content to HTML
         html_content = markdown(file_content)
         return HttpResponse(html_content, content_type='text/html')
+    except MarkDown.DoesNotExist:
+        return JsonResponse({'error': 'File not found'}, status=404)
+
+
+def delete_note(request, file_id):
+    try:
+        file_instance = MarkDown.objects.get(id=file_id)
+        file_instance.file.delete()
+        file_instance.delete()
+        return redirect('home')
     except MarkDown.DoesNotExist:
         return JsonResponse({'error': 'File not found'}, status=404)

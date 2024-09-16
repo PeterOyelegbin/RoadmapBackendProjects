@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Note-Taking App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Upload file -->
+        <h2 class="mb-4">Upload a File</h2>
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+        <hr>
+
+        <!-- List all uploaded files -->
+        <h2 class="mt-5">Uploaded Files</h2>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Filename</th>
+                    <th>File Path</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for file in markdown %}
+                <tr>
+                    <td>{{ file.filename }}</td>
+                    <td>{{ file.file.url }}</td>
+                    <td>
+                        <a href="{% url 'check-grammar' file.id %}" class="btn btn-primary">Check Grammar</a>
+                        <a href="{% url 'render-note' file.id %}" class="btn btn-success">Render Note</a>
+                        <a href="{% url 'delete-note' file.id %}" class="btn btn-danger">Delete Note</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No files available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

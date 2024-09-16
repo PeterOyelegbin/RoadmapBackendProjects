@@ -10,5 +10,5 @@ class MarkDownForm(ModelForm):
             "file": "Upload a Markdown file (e.g; .md)",
         }
         widgets = {
-            "file": FileInput(attrs={"class":"form-control"}),
+            "file": FileInput(attrs={"class":"form-control-file"}),
         }
