@@ -1,6 +1,5 @@
 # [Weather API](https://roadmap.sh/projects/weather-api-wrapper-service)
-**Project Overview**
-In this project, we will build a weather API that fetches and returns weather data from a third-party API. This project will help you understand how to work with third-party APIs, implement caching, and manage environment variables using FastAPI, Redis, and Visual Crossing’s API.
+**Project Overview**: In this project, we will build a weather API that fetches and returns weather data from a third-party API. This project will help you understand how to work with third-party APIs, implement caching, and manage environment variables using FastAPI, Redis, and Visual Crossing’s API.
 
 
 ## Problem Statement
