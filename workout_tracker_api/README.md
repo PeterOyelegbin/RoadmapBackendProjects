@@ -1,10 +1,10 @@
-# Workout API
+# [Workout API](https://roadmap.sh/projects/fitness-workout-tracker)
 
 ## Problem Statement
-In the modern fitness industry, individuals often struggle to maintain a consistent workout routine and track their progress effectively. Many available solutions lack the flexibility and user-friendliness needed to tailor workout plans to individual needs and goals. Additionally, tracking progress over time can be cumbersome without a dedicated system to log workouts and sessions.
+In the modern fitness industry, individuals often struggle to maintain a consistent workout routine and track their progress effectively. Many available solutions lack the flexibility and user-friendliness to tailor workout plans to individual needs and goals. Tracking progress over time can be cumbersome without a dedicated system to log workouts and sessions.
 
 ## Solution
-The Workout API is designed to address these challenges by providing a robust backend system for a gym platform. It allows users to create customized workout plans, log individual workout sessions, and track their progress over time. The API offers a seamless and secure experience, ensuring that users can focus on their fitness goals without technical distractions.
+The Workout API is designed to address these challenges by providing a robust backend system for a gym platform. It allows users to create customized workout plans, log individual workout sessions, and track their progress over time. The API offers a seamless and secure experience, ensuring users can focus on their fitness goals without technical distractions.
 
 ## Technology Used
 - **Django**: For building the backend of the application, providing a robust and scalable framework.
@@ -40,4 +40,3 @@ The Workout API has a significant impact on users by:
 
 ## Conclusion
 The Workout API demonstrates the power of Django, JWT, and MySQL in creating a secure, scalable, and user-friendly application. By addressing common challenges in fitness tracking and workout management, this API helps users stay motivated and achieve their fitness goals efficiently. The project showcases my expertise in backend development and my ability to create practical solutions for real-world problems.
-
