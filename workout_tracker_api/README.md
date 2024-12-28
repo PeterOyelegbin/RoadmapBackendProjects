@@ -1,49 +1,43 @@
-# [Workout Tracker](https://roadmap.sh/projects/fitness-workout-tracker).
-This project involves creating a backend system for a workout tracker application where users can sign up, log in, create workout plans, and track their progress. The system will feature JWT authentication, CRUD operations for workouts, and generate reports on past workouts.
+# Workout API
 
+## Problem Statement
+In the modern fitness industry, individuals often struggle to maintain a consistent workout routine and track their progress effectively. Many available solutions lack the flexibility and user-friendliness needed to tailor workout plans to individual needs and goals. Additionally, tracking progress over time can be cumbersome without a dedicated system to log workouts and sessions.
 
-## Requirements
-You are required to develop an API for a workout tracker application that allows users to manage their workouts and track their progress. Your first task is to think about the database schema and the API endpoints that will be needed to support the application’s functionality. Here are some of the key features you should consider:
+## Solution
+The Workout API is designed to address these challenges by providing a robust backend system for a gym platform. It allows users to create customized workout plans, log individual workout sessions, and track their progress over time. The API offers a seamless and secure experience, ensuring that users can focus on their fitness goals without technical distractions.
 
-### Exercise Data
-You should write a data seeder to populate the database with a list of exercises. Each exercise should have a name, description, and category (e.g., cardio, strength, flexibility) or muscle group (e.g., chest, back, legs). Exercises will be used to create workout plans.
+## Technology Used
+- **Django**: For building the backend of the application, providing a robust and scalable framework.
+- **JWT (JSON Web Tokens)**: For secure authentication and authorization, ensuring that user data is protected.
+- **MySQL**: As the database solution, offering reliable and efficient data storage.
 
-### User Authentication and Authorization
-Users will be able to sign up, log in, and log out of the application. You should use JWT tokens for authentication and authorization. Only authenticated users should be able to create, update, and delete workout plans. Needless to say, users should only be able to access their own workout plans.
-- Sign-Up: Allow users to create an account.
-- Login: Allow users to log in to their account.
-- JWT: Use JSON Web Tokens for authentication.
+## Project Implementation
+1. **Setup and Installation**
+    - Clone the repository
+    - Install dependencies using `pip install -r requirements.txt`
+    - Set up the MySQL database and configure the database settings in `settings.py`
+    - Run migrations with `python manage.py migrate`
+    - Start the server with `python manage.py runserver`
 
-### Workout Management
-Users will be able to create their workout plans. Workout plans should consist of multiple exercises, each with a set number of repetitions, sets, and weights. Users should be able to update and delete their workout plans. Additionally, users should be able to schedule workouts for specific dates and times.
-- Create Workout: Allow users to create workouts composed of multiple exercises.
-- Update Workout: Allow users to update workouts and add comments.
-- Delete Workout: Allow users to delete workouts.
-- Schedule Workouts: Allow users to schedule workouts for specific dates and times.
-- List Workouts: List active or pending workouts sorted by date and time.
-- Generate Reports: Generate reports on past workouts and progress.
+2. **API Endpoints**
+    - **User Authentication**: Signup, login, and obtain JWT tokens.
+    - **Workout Plans**: Create, update, retrieve, and delete workout plans.
+    - **Workout Sessions**: Log sessions, track progress, and generate reports on past workouts.
 
+3. **Security Measures**
+    - JWT-based authentication to ensure secure access to the API endpoints.
+    - Data validation and error handling to maintain data integrity and provide meaningful feedback.
 
-## Demo
-Here's a simple demo of how the application should work:
-[Watch the video](https://www.youtube.com/watch?v=IyHRBj_iKY0)
+## Impact
+The Workout API has a significant impact on users by:
+- Enabling them to create personalized workout plans tailored to their fitness goals.
+- Providing a convenient way to log workout sessions and monitor progress over time.
+- Offering insights through reports that help users adjust their routines for better results.
+- Enhancing user experience with a secure and reliable backend system.
 
+## Future Enhancements
+- **Notification**: Implement a customized user motivation mail notification system to ensure users are reminded of their workout sessions to improve consistency.
 
-## Usage
-### Install Dependencies
-Open your teminal and enter the command below to install needed dependencies:
-```bash
-pip install -r requirements.txt
-```
+## Conclusion
+The Workout API demonstrates the power of Django, JWT, and MySQL in creating a secure, scalable, and user-friendly application. By addressing common challenges in fitness tracking and workout management, this API helps users stay motivated and achieve their fitness goals efficiently. The project showcases my expertise in backend development and my ability to create practical solutions for real-world problems.
 
-### Start the Server
-To start the broadcast server, use the command below:
-```bash
-python broadcast-server.py start
-```
-
-### Coonect to the Server
-Open a new terminal and enter the command below to connect to the server already running as shown below:
-```bash
-python broadcast-server.py connect
-```

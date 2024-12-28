@@ -1,28 +1,126 @@
-from django.contrib.auth.models import User
-from rest_framework import generics, status
+from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import RegisterSerializer
+from rest_framework_simplejwt.tokens import AccessToken
+from django.contrib.auth import authenticate
+from drf_yasg.utils import swagger_auto_schema
+from datetime import timedelta
+from utils import CustomJWTAuthentication, cache, general_logger
+from .serializers import SignupSerializer, LoginSerializer
 
 
 # Create your views here.
-class RegisterView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    permission_classes = (AllowAny,)
-    serializer_class = RegisterSerializer
+class SignupView(viewsets.ViewSet):
+    """
+    User Signup Endpoint
+
+    Register as a new user. 
+    """
+    serializer_class = SignupSerializer
+    permission_classes = [AllowAny,]
+
+    @swagger_auto_schema(request_body=SignupSerializer, responses={201: 'CREATED', 400: 'BAD REQUEST'})
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        try:
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            response_data = {
+                "success": True,
+                "status": 201,
+                "message": "User signed up successful",
+                "data": serializer.data
+            }
+            return Response(response_data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            general_logger.error("An error occurred: %s", e)
+            response_data = {
+                "success": False,
+                "status": 400,
+                "message": "Validation error: Invalid input from user or empty fields",
+            }
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
 
 
-class LogoutView(generics.GenericAPIView):
+class LoginView(viewsets.ViewSet):
+    """
+    User Login Endpoint
+
+    User log in with their email and password.
+    """
+    serializer_class = LoginSerializer
+    permission_classes = [AllowAny,]
+
+    @swagger_auto_schema(request_body=LoginSerializer, responses={200: 'OK', 401: 'UNAUTHORIZED', 400: 'BAD_REQUEST'})
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        try:
+            serializer.is_valid(raise_exception=True)
+            username = serializer.validated_data.get('username')
+            password = serializer.validated_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                access_token = AccessToken.for_user(user)
+                response_data = {
+                    'success': True,
+                    'status': 200,
+                    'message': 'Login successful',
+                    'access_token': str(access_token),
+                }
+                return Response(response_data, status=status.HTTP_200_OK)
+            else:
+                response_data = {
+                    'success': False,
+                    'status': 401,
+                    'message': 'Invalid credentials',
+                }
+                return Response(response_data, status=status.HTTP_401_UNAUTHORIZED)
+        except Exception as e:
+            general_logger.error("An error occurred: %s", e)
+            response_data = {
+                'success': False,
+                'status': 400,
+                'message': 'Validation error: Username or password field is invalid or empty',
+            }
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+
+class LogoutView(viewsets.ViewSet):
+    """
+    User Logout Endpoint
+
+    Logs out user by blacklisting their access token.
+    """
     permission_classes = (IsAuthenticated,)
 
-    def post(self, request):
+    @swagger_auto_schema(responses={205: 'RESET CONTENT', 400: 'BAD REQUEST'})
+    def create(self, request):
         try:
-            refresh_token = request.data.get("refresh")
-            if not refresh_token:
-                return Response({"error": "Refresh token is required."}, status=status.HTTP_400_BAD_REQUEST)
-            token = RefreshToken(refresh_token)
-            token.blacklist()
-            return Response({"meassge": "Logout successful"}, status=status.HTTP_205_RESET_CONTENT)
+            token = request.auth
+            if token:
+                cache_key = CustomJWTAuthentication.get_cache_key(self, str(token))
+                # Set timeout as per token expiry
+                timeout = timedelta(hours=1).total_seconds()
+                cache.set(cache_key, 'blacklisted', timeout=timeout)
+                response_data = {
+                    'success': True,
+                    'status': 205,
+                    'message': 'Logout successful',
+                }
+                return Response(response_data, status=status.HTTP_205_RESET_CONTENT)
+            else:
+                response_data = {
+                    'success': False,
+                    'status': 400,
+                    'message': 'Invalid token',
+                }
+                return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            general_logger.error("An error occurred: %s", e)
+            response_data = {
+                'success': False,
+                'status': 400,
+                'message': "Validation error occured",
+            }
+            return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+        
